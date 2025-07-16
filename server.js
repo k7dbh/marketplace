@@ -1,3 +1,4 @@
+// do not forget to do the npm i
 require('dotenv').config({ quiet: true })
 const express = require('express')
 const app = express()
@@ -6,7 +7,9 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+const path = require('path')//// new
 const authController = require('./controllers/auth.controller')
+const listingController = require("./controllers/listing.controller")//// new added
 const isSignedIn = require('./middleware/is-signed-in')
 const passUserToView = require('./middleware/pass-user-to-view')
 
@@ -17,6 +20,7 @@ mongoose.connection.on('connected', () => {
 })
 
 // MIDDLEWARE
+app.use(express.static(path.join(__dirname, 'public')))/// new
 app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
@@ -36,6 +40,7 @@ app.get('/', (req, res) => {
 
 // ROUTES
 app.use('/auth', authController)
+app.use('/listings', listingController)//// new added
 
 app.get('/vip-lounge', isSignedIn, (req, res) => {
     res.send(`Welcome ✨`)

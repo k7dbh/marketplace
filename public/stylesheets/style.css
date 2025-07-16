@@ -1,0 +1,25 @@
+body{
+    background-color:antiquewhite;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+.listing-img {
+    width: 50vw;
+}
+
+li {
+    list-style: none;
+    text-align: center;
+}
+ul{
+    margin: 0px;
+    padding: 0px;
+}
+li{
+    list-style-type: none;
+    text-align: center;
+}
