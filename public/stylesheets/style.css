@@ -23,3 +23,10 @@ li{
     list-style-type: none;
     text-align: center;
 }
+
+.action{
+    display: flex;
+    flex-direction: column;
+}
+
+
