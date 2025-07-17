@@ -2,6 +2,7 @@
 const express = require('express')
 const router = express.Router()
 const Listing = require('../models/listing')// step 8
+const isSignedIn = require('../middleware/is-signed-in')
 
 // view New LISTING FORM
 router.get("/new", (req, res) => {
@@ -35,5 +36,17 @@ router.get('/:listingId', async (req, res) => {
     res.render('listings/show.ejs', {foundListing: foundListing})
 })
 
+// DELETE LISTING FROM DATABASE
+router.delete('/:listingId', async (req, res) => {
+    // find the listing 
+    const foundListing = await Listing.findById(req.params.listingId).populate('seller')
+    // check if the logged in user owns the listing
+    if(foundListing.seller._id.equals(req.session.user._id)){
+        // delete the listing and redirect
+        await foundListing.deleteOne()
+        res.redirect('/listings')
+    }
+    return res.send('Not authorized')
+})
 
 module.exports = router

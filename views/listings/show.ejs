@@ -13,5 +13,11 @@
     <p>SELLER: <%= foundListing.seller.username %></p>
     <p><strong><%= foundListing.price %> BHD</strong></p>
     <img src="<%= foundListing.image %>" class="listing-img" alt="Image of <%= foundListing.title %>" />
+
+    <% if (foundListing.seller._id.equals(user._id)) { %>
+        <form action="/listingg/<%= foundListing._id %>?_method=DELETE" method="POST">
+            <button type="submit">DELETE</button>
+        </form>
+    <% } %>
 </body>
 </html>

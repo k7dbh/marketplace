@@ -9,7 +9,8 @@
 <% if (user) { %>
 <h1>Welcome to the app, <%= user.username %>!</h1>
 <a href="/auth/sign-out">Sign out</a>
-<a href="/listings/new"></a><!-- for post step 6 -->
+<a href="/listings/new">Add a Listing</a><!-- for post step 6 -->
+<a href="/listings">View All Listings</a><!-- for post step 6 -->
 <% } else { %>
 <h1>Welcome to the app, guest.</h1>
 <p>
